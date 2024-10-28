@@ -2,6 +2,10 @@ import { MdLocationOn } from "react-icons/md";
 import { HiMinus, HiOutlineCalendar, HiPlus, HiSearch } from "react-icons/hi";
 import { useRef, useState } from "react";
 import useOutsideClick from "../useOutsideClick";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { DateRange } from "react-date-range";
+import { format } from "date-fns";
 
 function Header() {
   const [destination, setDestination] = useState("");
@@ -19,6 +23,16 @@ function Header() {
       };
     });
   };
+
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+
+  const [openDate, setOpenDate] = useState(false);
 
   return (
     <div className="header">
@@ -38,7 +52,18 @@ function Header() {
         </div>
         <div className="headerSearchItem">
           <HiOutlineCalendar className="headerIcon dateIcon" />
-          <div className="dateDropDown">2023/06/15</div>
+          <div onClick={() => setOpenDate(!openDate)} className="dateDropDown">
+            {`${format(date[0].startDate, "MM/dd//yyyy")} to ${format(date[0].endDate,"MM/dd/yyyy")}`}
+          </div>
+          {openDate && (
+            <DateRange
+              onChange={(item) => setDate([item.selection])}
+              ranges={date}
+              minDate={new Date()}
+              moveRangeOnFirstSelection={true}
+              className="date"
+            />
+          )}
           <span className="seperator"></span>
         </div>
         <div className="headerSearchItem">
@@ -68,7 +93,12 @@ function Header() {
 
 export default Header;
 
-function GuestOptionList({ options, handleOpertations, setOpenOption, exceptionId }) {
+function GuestOptionList({
+  options,
+  handleOpertations,
+  setOpenOption,
+  exceptionId,
+}) {
   const optionsRef = useRef();
   useOutsideClick(optionsRef, setOpenOption, exceptionId);
   return (
