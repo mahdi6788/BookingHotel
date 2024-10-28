@@ -4,13 +4,21 @@ import { useState } from "react";
 
 function Header() {
   const [destination, setDestination] = useState("");
-  const [openOption, setOpenOption] = useState(false)
+  const [openOption, setOpenOption] = useState(false);
   const [options, setOptions] = useState({
     Adult: 1,
     Children: 0,
-    Room: 1
-  })
+    Room: 1,
+  });
+  const handleOpertations = (name, operation) => {
+    setOptions(prev => {
+        return {
+        ...prev,
+        [name]: operation === "inc" ? options[name] + 1 : options[name] - 1 
+    }
 
+    })
+  }
 
   return (
     <div className="header">
@@ -34,10 +42,10 @@ function Header() {
           <span className="seperator"></span>
         </div>
         <div className="headerSearchItem">
-          <div id="optionDropDown" onClick={()=>setOpenOption(!openOption)}>
-            1 adult &bull; 2 children &bull; 1 room
+          <div id="optionDropDown" onClick={() => setOpenOption(!openOption)}>
+            {options.Adult} adult &bull; {options.Children} children &bull; {options.Room} room
           </div>
-          {openOption && <GuestOptionList options={options}/>}
+          {openOption && <GuestOptionList options={options} handleOpertations={handleOpertations} />}
           <span className="seperator"></span>
         </div>
         <div className="headerSearchItem">
@@ -52,30 +60,36 @@ function Header() {
 
 export default Header;
 
-
-function GuestOptionList({options}){
-    return(
-        <div className="guestOptions">
-            <OptionItem type="Adult" options={options} minLimit={2} />
-            <OptionItem type="Children" options={options} minLimit={1}/>
-            <OptionItem type="Room" options={options} minLimit={2}/>
-        </div>
-    )
+function GuestOptionList({ options, handleOpertations }) {
+  return (
+    <div className="guestOptions">
+      <OptionItem type="Adult" options={options} minLimit={2} handleOpertations={handleOpertations} />
+      <OptionItem type="Children" options={options} minLimit={1}  handleOpertations={handleOpertations}/>
+      <OptionItem type="Room" options={options} minLimit={2} handleOpertations={handleOpertations} />
+    </div>
+  );
 }
 
-function OptionItem({type, options, minLimit}) {
-    return(
-        <div className="guestOptionItem">
-                <span className="optionText">{type}</span>
-                <div className="optionCounter">
-                    <button className="optionCounterBtn" disabled={options[type] < minLimit}>
-                        <HiMinus className="icon"/>
-                    </button>
-                    <span className="optionCounterNumber">{options[type]}</span>
-                    <button className="optionCounterBtn">
-                    <HiPlus className="icon"/>
-                    </button>
-                </div>
-            </div>
-    )
+function OptionItem({ type, options, minLimit, handleOpertations }) {
+  return (
+    <div className="guestOptionItem">
+      <span className="optionText">{type}</span>
+      <div className="optionCounter">
+        <button
+          className="optionCounterBtn"
+          disabled={options[type] < minLimit}
+          onClick={() => handleOpertations(type, "dec")}
+        >
+          <HiMinus className="icon" />
+        </button>
+        <span className="optionCounterNumber">{options[type]}</span>
+        <button
+          className="optionCounterBtn"
+          onClick={() => handleOpertations(type, "inc")}
+        >
+          <HiPlus className="icon" />
+        </button>
+      </div>
+    </div>
+  );
 }
