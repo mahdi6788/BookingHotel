@@ -5,6 +5,11 @@ import { useState } from "react";
 function Header() {
   const [destination, setDestination] = useState("");
   const [openOption, setOpenOption] = useState(false)
+  const [options, setOptions] = useState({
+    Adult: 1,
+    Children: 0,
+    Room: 1
+  })
 
 
   return (
@@ -32,7 +37,7 @@ function Header() {
           <div id="optionDropDown" onClick={()=>setOpenOption(!openOption)}>
             1 adult &bull; 2 children &bull; 1 room
           </div>
-          {openOption && <GuestOptionList />}
+          {openOption && <GuestOptionList options={options}/>}
           <span className="seperator"></span>
         </div>
         <div className="headerSearchItem">
@@ -48,25 +53,25 @@ function Header() {
 export default Header;
 
 
-function GuestOptionList(){
+function GuestOptionList({options}){
     return(
         <div className="guestOptions">
-            <OptionItem />
-            <OptionItem />
-            <OptionItem />
+            <OptionItem type="Adult" options={options} minLimit={2} />
+            <OptionItem type="Children" options={options} minLimit={1}/>
+            <OptionItem type="Room" options={options} minLimit={2}/>
         </div>
     )
 }
 
-function OptionItem() {
+function OptionItem({type, options, minLimit}) {
     return(
         <div className="guestOptionItem">
-                <span className="optionText">Adult</span>
+                <span className="optionText">{type}</span>
                 <div className="optionCounter">
-                    <button className="optionCounterBtn">
+                    <button className="optionCounterBtn" disabled={options[type] < minLimit}>
                         <HiMinus className="icon"/>
                     </button>
-                    <span className="optionCounterNumber">2</span>
+                    <span className="optionCounterNumber">{options[type]}</span>
                     <button className="optionCounterBtn">
                     <HiPlus className="icon"/>
                     </button>
