@@ -1,6 +1,7 @@
 import { MdLocationOn } from "react-icons/md";
 import { HiMinus, HiOutlineCalendar, HiPlus, HiSearch } from "react-icons/hi";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import useOutsideClick from "../useOutsideClick";
 
 function Header() {
   const [destination, setDestination] = useState("");
@@ -11,14 +12,13 @@ function Header() {
     Room: 1,
   });
   const handleOpertations = (name, operation) => {
-    setOptions(prev => {
-        return {
+    setOptions((prev) => {
+      return {
         ...prev,
-        [name]: operation === "inc" ? options[name] + 1 : options[name] - 1 
-    }
-
-    })
-  }
+        [name]: operation === "inc" ? options[name] + 1 : options[name] - 1,
+      };
+    });
+  };
 
   return (
     <div className="header">
@@ -43,9 +43,17 @@ function Header() {
         </div>
         <div className="headerSearchItem">
           <div id="optionDropDown" onClick={() => setOpenOption(!openOption)}>
-            {options.Adult} adult &bull; {options.Children} children &bull; {options.Room} room
+            {options.Adult} adult &bull; {options.Children} children &bull;{" "}
+            {options.Room} room
           </div>
-          {openOption && <GuestOptionList options={options} handleOpertations={handleOpertations} />}
+          {openOption && (
+            <GuestOptionList
+              options={options}
+              handleOpertations={handleOpertations}
+              setOpenOption={setOpenOption}
+              exceptionId={"optionDropDown"}
+            />
+          )}
           <span className="seperator"></span>
         </div>
         <div className="headerSearchItem">
@@ -60,12 +68,29 @@ function Header() {
 
 export default Header;
 
-function GuestOptionList({ options, handleOpertations }) {
+function GuestOptionList({ options, handleOpertations, setOpenOption, exceptionId }) {
+  const optionsRef = useRef();
+  useOutsideClick(optionsRef, setOpenOption, exceptionId);
   return (
-    <div className="guestOptions">
-      <OptionItem type="Adult" options={options} minLimit={2} handleOpertations={handleOpertations} />
-      <OptionItem type="Children" options={options} minLimit={1}  handleOpertations={handleOpertations}/>
-      <OptionItem type="Room" options={options} minLimit={2} handleOpertations={handleOpertations} />
+    <div className="guestOptions" ref={optionsRef}>
+      <OptionItem
+        type="Adult"
+        options={options}
+        minLimit={2}
+        handleOpertations={handleOpertations}
+      />
+      <OptionItem
+        type="Children"
+        options={options}
+        minLimit={1}
+        handleOpertations={handleOpertations}
+      />
+      <OptionItem
+        type="Room"
+        options={options}
+        minLimit={2}
+        handleOpertations={handleOpertations}
+      />
     </div>
   );
 }
