@@ -13,9 +13,9 @@ function Header() {
   const [destination, setDestination] = useState("");
   const [openOption, setOpenOption] = useState(false);
   const [options, setOptions] = useState({
-    Adult: 1,
-    Children: 0,
-    Room: 1,
+    adult: 1,
+    children: 0,
+    room: 1,
   });
   const handleOpertations = (name, operation) => {
     setOptions((prev) => {
@@ -82,8 +82,8 @@ function Header() {
         </div>
         <div className="headerSearchItem">
           <div id="optionDropDown" onClick={() => setOpenOption(!openOption)}>
-            {options.Adult} adult &bull; {options.Children} children &bull;{" "}
-            {options.Room} room
+            {options.adult} adult &bull; {options.children} children &bull;{" "}
+            {options.room} room
           </div>
           {openOption && (
             <GuestOptionList
@@ -118,19 +118,19 @@ function GuestOptionList({
   return (
     <div className="guestOptions" ref={optionsRef}>
       <OptionItem
-        type="Adult"
+        type="adult"
         options={options}
         minLimit={2}
         handleOpertations={handleOpertations}
       />
       <OptionItem
-        type="Children"
+        type="children"
         options={options}
         minLimit={1}
         handleOpertations={handleOpertations}
       />
       <OptionItem
-        type="Room"
+        type="room"
         options={options}
         minLimit={2}
         handleOpertations={handleOpertations}
