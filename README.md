@@ -19,4 +19,8 @@ url: server (database),
 note: if we want to search in all query string, we should use q instead of name or accommodation:
 name_like=${destination || ""} ===> q=${destination || ""}
 6. after getting data from datavbase in server by using url and filtered by query, should render data properties into a Link tag to be clickable.
-7. the initial value of destination can be defined by previous location searched or nothing for the first search
+7. the initial value of destination can be defined by previous location searched or nothing for the first search.
+8. *** we need data for both Sidebar and MapContainer: so we should create a Context and provide it in App component and consume it in useContext.
+Create a component as a context named HotelsProvider including createContext and useContext, also all the state required located in Hotel component.
+where we need the value provided by HotelContext.Provider, we should use:
+const {data, isLoading} = useHotel(). also we should use element HotelContext in App to wrap all elements there.
