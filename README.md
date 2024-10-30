@@ -18,4 +18,5 @@ Then use them in query.
 url: server (database),
 note: if we want to search in all query string, we should use q instead of name or accommodation:
 name_like=${destination || ""} ===> q=${destination || ""}
-
+6. after getting data from datavbase in server by using url and filtered by query, should render data properties into a Link tag to be clickable.
+7. the initial value of destination can be defined by previous location searched or nothing for the first search

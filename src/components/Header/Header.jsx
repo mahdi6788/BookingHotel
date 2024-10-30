@@ -6,11 +6,20 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 
 function Header() {
-  const navigate = useNavigate()
-  const [destination, setDestination] = useState("");
+  const navigate = useNavigate();
+  /// useSearchParams used to have searchParams generated before by createSearchParams
+  const [searchParams, setSearchParams] = useSearchParams();
+  /// the initial value of destination can be defined by previous location searched or nothing for the first search
+  const [destination, setDestination] = useState(
+    searchParams.get("destination") || ""
+  );
   const [openOption, setOpenOption] = useState(false);
   const [options, setOptions] = useState({
     adult: 1,
@@ -38,13 +47,13 @@ function Header() {
     const encodedParams = createSearchParams({
       destination,
       date: JSON.stringify(date),
-      options: JSON.stringify(options)
-    })
+      options: JSON.stringify(options),
+    });
     navigate({
       pathname: "/hotels",
-      search: encodedParams.toString()
-    })
-  }
+      search: encodedParams.toString(),
+    });
+  };
 
   const [openDate, setOpenDate] = useState(false);
 
@@ -67,7 +76,10 @@ function Header() {
         <div className="headerSearchItem">
           <HiOutlineCalendar className="headerIcon dateIcon" />
           <div onClick={() => setOpenDate(!openDate)} className="dateDropDown">
-            {`${format(date[0].startDate, "MM/dd//yyyy")} to ${format(date[0].endDate,"MM/dd/yyyy")}`}
+            {`${format(date[0].startDate, "MM/dd//yyyy")} to ${format(
+              date[0].endDate,
+              "MM/dd/yyyy"
+            )}`}
           </div>
           {openDate && (
             <DateRange
