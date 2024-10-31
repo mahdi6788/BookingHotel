@@ -24,3 +24,6 @@ name_like=${destination || ""} ===> q=${destination || ""}
 Create a component as a context named HotelsProvider including createContext and useContext, also all the state required located in Hotel component.
 where we need the value provided by HotelContext.Provider, we should use:
 const {data, isLoading} = useHotel(). also we should use element HotelContext in App to wrap all elements there.
+9. react-leaflet:
+use example of this library to show map and determine mapCenter as center. mapCenter save lat and lng of the location, and setMapCenter is in useEffect, so each time page get re-rendered center has the location of the hotel and do not prevent to refresh. also if location change, effect function will be updated and show new location. 
+in Marker and Popup, we need information of each hotel so we use hotel.map to make a loop and get info.
