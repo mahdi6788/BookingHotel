@@ -9,7 +9,7 @@ function AppLayout() {
             </div>
             <div className="mapContainer">
                 <Map/>
-                </div>
+            </div>
         </div>
     )
 }

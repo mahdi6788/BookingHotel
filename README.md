@@ -29,3 +29,6 @@ use example of this library to show map and determine mapCenter as center. mapCe
 in Marker and Popup, we need information of each hotel so we use hotel.map to make a loop and get info.
 10. use user location:
 define a button  "My location". it has event function that get user location using browser navigator: navigator.geolocation.getCurrentPosition. we use a custom hook, useGeoLocation, containing function getPosition. and then import this hook to the Map use a useEffect to update setMapLocation.
+11. single hotel:
+it is a dynamic page, meaning that Applayout has two children: 1. Hotels containing search results and 2. singleHotel showing info of one selected hotel. in dynamic route, the page shape is the same but content differs by changing the route.
+
