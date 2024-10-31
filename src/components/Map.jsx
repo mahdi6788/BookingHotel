@@ -1,11 +1,10 @@
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
-import { useHotel } from "./HotelsProvider";
+import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvent } from "react-leaflet";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import useGeoLocation from "../hooks/useGeoLocation";
 
-function Map() {
-  const { isLoading, hotels } = useHotel();
+//// the Map is a global componnt that sometimes we wnat to show hotels on map and sometimes we want to show selected places, so we use markerLocation and define that in each component
+function Map({markerLocation}) {
   const [mapCenter, setMapCenter] = useState([36.2152, 57.6678]);
   const [searchParams, setSearchParams] = useSearchParams();
   const lat = searchParams.get("lat");
@@ -47,9 +46,10 @@ function Map() {
           contributors'
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
+        <DetectClick />
         <ChangeCenter position={mapCenter} />
-        {/* info based on the hotels */}
-        {hotels.map((item) => (
+        {/* info based on the markerLocation */}
+        {markerLocation.map((item) => (
           <Marker key={item.id} position={[item.latitude, item.longitude]}>
             <Popup>
               {/* <img style={{width:"200px"}} src={item.xl_picture_url} alt={item.price} /> */}
@@ -69,4 +69,13 @@ function ChangeCenter({ position }) {
   const map = useMap();
   map.setView(position);
   return null;
+}
+
+/// to find where was clicked to
+function DetectClick(){
+  const navigate = useNavigate()
+  useMapEvent({
+    click: e => e.navigate(`/bookmark?lat=${e.latlng.lat}&lng=${e.latlng.lng}`)
+  })
+  return null
 }
