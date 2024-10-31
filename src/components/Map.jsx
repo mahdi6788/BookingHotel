@@ -33,7 +33,10 @@ function Map() {
         {/* info based on the hotels */}
         {hotels.map((item) => (
           <Marker key={item.id} position={[item.latitude, item.longitude]}>
-            <Popup>{item.host_location}</Popup>
+            <Popup>
+              {/* <img style={{width:"200px"}} src={item.xl_picture_url} alt={item.price} /> */}
+              € {item.price}
+              </Popup>
           </Marker>
         ))}
       </MapContainer>
