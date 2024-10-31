@@ -3,12 +3,13 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import LocationList from "./components/locationList/LocationList";
 import { Route, Routes } from "react-router-dom";
-import AppLayout from "./components/AppLayout";
 import Hotels from "./components/Hotels";
-import HotelsProvider from "./components/HotelsProvider";
 import SingleHotel from "./components/SingleHotel";
 import BookmarkLayout from "./components/BookmarkLayout";
 import BookmarkListProvider from "./context/BookmarkListProvider";
+import Bookmark from "./components/bookmark/Bookmark";
+import HotelsProvider from "./context/HotelsProvider";
+import AppLayout from "./components/AppLayout"
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
               <Route path=":id" element={<SingleHotel />} />
             </Route>
             <Route path="/bookmark" element={<BookmarkLayout />}>
-              <Route index element={<>List</>} />
+              <Route index element={<Bookmark/>} />
               <Route path="add" element={<>Add</>} />
             </Route>
           </Routes>

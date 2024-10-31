@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
-import { useHotel } from "./HotelsProvider";
 import Map from "./Map"
+import { useHotel } from "../context/HotelsProvider";
 
 function AppLayout() {
   const { hotels } = useHotel();

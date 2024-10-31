@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import Loading from "./Loading"
-import { useHotel } from "./HotelsProvider"
 import { useEffect } from "react"
+import { useHotel } from "../context/HotelsProvider"
 
 function SingleHotel() {
     const {id} = useParams()
