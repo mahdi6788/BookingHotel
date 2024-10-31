@@ -35,3 +35,9 @@ define a button  "My location". it has event function that get user location usi
 it is a dynamic page, meaning that Applayout has two children: 1. Hotels containing search results and 2. singleHotel showing info of one selected hotel. in dynamic route, the page shape is the same but content differs by changing the route.
 13. we need to know which hotel was selected and use this info in other components, so we write a function into context (HotelsProvider) to be available for other components.
 14. use useHotel() as a custome hook in Hotels and SingleHotel to have access to states and functions.
+15. bookmark:
+bookMarkLayout is shows two section :map and sidebar that is dynamic with two parts : add and list. by clicking on the map it goes to the page of bookmark/add.
+16. make new BookmarkProvider to share info about bookmarks just like HotelProvider
+
+
+
