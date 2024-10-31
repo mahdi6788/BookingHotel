@@ -71,11 +71,11 @@ function ChangeCenter({ position }) {
   return null;
 }
 
-/// to find where was clicked to
+/// when click on the map, it is navigated to the defined path
 function DetectClick(){
   const navigate = useNavigate()
   useMapEvent({
-    click: e => e.navigate(`/bookmark?lat=${e.latlng.lat}&lng=${e.latlng.lng}`)
+    click: e => navigate(`/bookmark/add?lat=${e.latlng.lat}&lng=${e.latlng.lng}`)
   })
   return null
 }
