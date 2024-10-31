@@ -3,7 +3,7 @@ import Loading from "./Loading"
 import { useHotel } from "./HotelsProvider";
 
 function Hotels() {
- const { hotels, isLoading } = useHotel()
+ const { hotels, isLoading, currentHotel } = useHotel()
 
   return (
     <div className="searchList">
@@ -16,7 +16,9 @@ function Hotels() {
             key={item.id}
             to={`/hotels/${item.id}?lat=${item.latitude}&lng=${item.longitude}`}
           >
-            <div className="searchItem">
+            <div className= {`searchItem ${
+              item.id === currentHotel?.id && "current-hotel"
+              }`}>
               <img src={item.xl_picture_url} alt={item.name} />
               <div className="searchitemDesc">
                 <p className="location">{item.smart_location}</p>

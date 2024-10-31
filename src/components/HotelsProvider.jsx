@@ -1,7 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { createContext } from "react";
 import { useSearchParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const HotelContext = createContext();
 
@@ -21,8 +23,24 @@ function HotelsProvider({ children }) {
   /// name_like=${destination || ""} ===> q=${destination || ""}
   const { data: hotels, isLoading } = useFetch(URL, query);
 
+
+  const [currentHotel, setCurrentHotel] = useState(null)
+  const [isLoadingCurrentHotel, setIsLoadingCurrentHotel] =useState(false)
+  
+  async function getsingleHotel(id){
+    setIsLoadingCurrentHotel(true)
+    try {
+      const {data} = await axios.get(`${URL}/${id}`)
+      setCurrentHotel(data)
+    } catch (error) {
+      toast.error(error.message)
+    } finally {
+      setIsLoadingCurrentHotel(false)
+    }
+  }
+
   return (
-    <HotelContext.Provider value={{ hotels, isLoading }}>
+    <HotelContext.Provider value={{ hotels, isLoading, getsingleHotel, isLoadingCurrentHotel, currentHotel }}>
       {children}
     </HotelContext.Provider>
   );
