@@ -1,10 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import useUrlLocation from "../../hooks/useUrlLocation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
+import ReactCountryFlag from "react-country-flag";
 
 function AddNewBookmark() {
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
+  const [countryCode, setCountryCode] = useState('')
+  const [isLoadingGeoCoding, setIsLoadingGeoCoding] = useState("false")
 
   const [lat, lng] = useUrlLocation();
 
@@ -14,6 +19,30 @@ function AddNewBookmark() {
     navigate(-1);
   };
 
+  const Base_GeoCoding_URL = "https://api-bdc.net/data/reverse-geocode-client";
+
+  useEffect(() => {
+    if (!lat, !lng) return
+
+    async function fetchLocationData() {
+        setIsLoadingGeoCoding(true)
+      try {
+        const {data} = await axios.get(
+          `${Base_GeoCoding_URL}?latitude=${lat}&longitude=${lng}&localityLanguage=en`
+        );
+        if (!data.countryCode) {
+            const message = "Here is not a specific city!"
+            toast.error(message)
+        }
+        setCityName(data.city || data.locality || "")
+        setCountry(data.countryName)
+        setCountryCode(data.countryCode || "")
+      } catch (error) {
+        toast.error(error.message);
+      } finally {setIsLoadingGeoCoding(false)}
+    }
+    fetchLocationData();
+  }, [lat,lng]);
 
   return (
     <div>
@@ -38,6 +67,7 @@ function AddNewBookmark() {
             className="country"
             id="country"
           />
+          <ReactCountryFlag svg  countryCode={countryCode} className="flag"  />
         </div>
         <div className="buttons">
           <div className="btn btn--back" onClick={handleBack}>

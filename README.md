@@ -46,5 +46,6 @@ useMapEvent({
   })
 18. AddNewBookmark:
 firstly, write the UI that is a form. secondly, we need the location (latitude and longitude) that we make a custome hook (useUrlLocation) to get info of the clicked point on the map using useMapEvent.
+19. use API to get location of each place. after getting lat and lng through useUrlLocation, we should use the API and the end of that add these lat and lng and  fetch data and find the info like cityname , country and ... . 
 
 
