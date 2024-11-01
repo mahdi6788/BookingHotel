@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import ReactCountryFlag from "react-country-flag";
+import { useBookmark } from "../../context/BookmarkListProvider";
 
 function AddNewBookmark() {
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
   const [countryCode, setCountryCode] = useState('')
   const [isLoadingGeoCoding, setIsLoadingGeoCoding] = useState("false")
+  const {createBookmark} = useBookmark()
 
   const [lat, lng] = useUrlLocation();
 
@@ -44,10 +46,34 @@ function AddNewBookmark() {
     fetchLocationData();
   }, [lat,lng]);
 
+  /// this is a async-await function becasue first se create new bookmark and then we post it through createBookmark function,
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if(!cityName || !country) return;
+
+    /// object of info want to store in dataset
+    const newBookmark={
+        cityName,
+        country,
+        countryCode,
+        latitude: lat,
+        longitude: lng,
+        host_location: cityName + " " + country
+    }
+    /// post new bookmark to the dataset
+    await createBookmark(newBookmark)
+    /// after adding new data, navigate to the bookmark page
+    navigate("/bookmark")
+    
+  }
+
+  
+
+
   return (
     <div>
       <h2>Add New Bookmark</h2>
-      <div className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div className="formControl">
           <label htmlFor="cityName">City Name</label>
           <input
@@ -70,12 +96,12 @@ function AddNewBookmark() {
           <ReactCountryFlag svg  countryCode={countryCode} className="flag"  />
         </div>
         <div className="buttons">
-          <div className="btn btn--back" onClick={handleBack}>
+          <button className="btn btn--back" onClick={handleBack}>
             &larr; Back
-          </div>
-          <div className="btn btn--primary">Add</div>
+          </button>
+          <button className="btn btn--primary">Add</button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
