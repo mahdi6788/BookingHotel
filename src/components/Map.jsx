@@ -2,13 +2,12 @@ import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvent } from "rea
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useGeoLocation from "../hooks/useGeoLocation";
+import useUrlLocation from "../hooks/useUrlLocation"
 
 //// the Map is a global componnt that sometimes we wnat to show hotels on map and sometimes we want to show selected places, so we use markerLocation and define that in each component
 function Map({markerLocation}) {
   const [mapCenter, setMapCenter] = useState([36.2152, 57.6678]);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const lat = searchParams.get("lat");
-  const lng = searchParams.get("lng");
+  const [lat, lng] = useUrlLocation()
   const {
     isLoading: isLoadingPosition, /// there was state with the same name isLoading so we should change this name
     position: GLPosition, /// there was state with the same name position so we should change this name
@@ -71,7 +70,7 @@ function ChangeCenter({ position }) {
   return null;
 }
 
-/// when click on the map, it is navigated to the defined path
+/// click on the map and find info of the clicked location and use it to navigate to the defined path
 function DetectClick(){
   const navigate = useNavigate()
   useMapEvent({

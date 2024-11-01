@@ -38,6 +38,13 @@ this is a dynamic page, meaning that Applayout has two types of components: the 
 15. bookmark:
 bookMarkLayout is shows two section :map and sidebar that is dynamic with two parts : add and list. by clicking on the map it goes to the page of bookmark/add.
 16. make new BookmarkProvider to share info about bookmarks just like HotelProvider
-17. for each bookmark there is an id, so we can use this id to get info of that bookmark from server (dataset). useParams() give use the id, and useBookmark() give required states and functions. should use useEffect to run the getsingleBookmark(id) when the page is loaded and its outlet determine currentBookmark and we can use this to show information in UI. 
+17. SingleBookmark:
+for each bookmark there is an id, so we can use this id to get info of that bookmark from server (dataset). useParams() give use the id, and useBookmark() give required states and functions. should use useEffect to run the getsingleBookmark(id) when the page is loaded and its outlet determine currentBookmark and we can use this to show information in UI. 
+18. useMapEvent: is a built-in option that provide us with information of the place we clicked on the map:
+useMapEvent({
+    click: e => navigate(`/bookmark/add?lat=${e.latlng.lat}&lng=${e.latlng.lng}`)
+  })
+18. AddNewBookmark:
+firstly, write the UI that is a form. secondly, we need the location (latitude and longitude) that we make a custome hook (useUrlLocation) to get info of the clicked point on the map using useMapEvent.
 
 
