@@ -56,4 +56,7 @@ const [{ currentBookmark, bookmarks, isLoading}, dispatch] =
 
 * note: bookmarkReducer and initialStates are outside of the context. also bookmarkReducer is a pure function so we cannot use side effect function like useEffect and event handler functions into that. so, we put them out of this function use dispatch to define type of action and transfer required data as a payload.
 
+23. authentication: 
+make a context including useReducer
+
 
