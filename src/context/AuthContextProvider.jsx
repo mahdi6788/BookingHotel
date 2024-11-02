@@ -3,8 +3,8 @@ import { useContext } from "react"
 import { createContext } from "react"
 
 const FakeUser = {
-    name: "MHD",
-    email: "MHD@gmail.com",
+    name: "User",
+    email: "user@gmail.com",
     password: "1234"
 }
 

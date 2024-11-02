@@ -13,7 +13,7 @@ function Login() {
     };
 
     useEffect(()=>{
-        if (isAuthenticated) navigate("/")
+        if (isAuthenticated) navigate("/" , {replace: true})
     },[isAuthenticated, navigate])
   return (
     <div className="loginContainer">
