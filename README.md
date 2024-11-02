@@ -49,5 +49,11 @@ firstly, write the UI that is a form. secondly, we need the location (latitude a
 19. use API to get location of each place. after getting lat and lng through useUrlLocation, we should use the API and the end of that add these lat and lng and  fetch data and find the info like cityname , country and ... . 
 20. use HiTrash in react-icons/hi to have an icon. also should use preventDefault to prevent from doing Link action. 
 21. then we need to delete the item having id from bookmarks also dataset, which is done in BookmarkListProvider as a context containing all states and fuctions we need. create a async-await function to delete item from dataset by using axios.delete.
+22. useReducer and useContext:
+* instead of using several useState, we can use useReducer containing those states and we can update them in bookmarkreducer instead of setStates based on the actions came from dispatch.
+const [{ currentBookmark, bookmarks, isLoading}, dispatch] =
+    useReducer(bookmarkReducer, initialState);
+
+* note: bookmarkReducer and initialStates are outside of the context. also bookmarkReducer is a pure function so we cannot use side effect function like useEffect and event handler functions into that. so, we put them out of this function use dispatch to define type of action and transfer required data as a payload.
 
 

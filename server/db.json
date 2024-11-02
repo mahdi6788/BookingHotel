@@ -1332,6 +1332,60 @@
       "longitude": "57.68011093139649",
       "host_location": "Sabzevar Iran (Islamic Republic of)",
       "id": 1
+    },
+    {
+      "cityName": "Vogtei",
+      "country": "Germany",
+      "countryCode": "DE",
+      "latitude": "51.15437025814868",
+      "longitude": "10.371093750000002",
+      "host_location": "Vogtei Germany",
+      "id": 2
+    },
+    {
+      "cityName": "Mettlach",
+      "country": "Germany",
+      "countryCode": "DE",
+      "latitude": "49.53055657928003",
+      "longitude": "6.50390625",
+      "host_location": "Mettlach Germany",
+      "id": 4
+    },
+    {
+      "cityName": "Burglen",
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "latitude": "46.92588289494367",
+      "longitude": "8.745117187500002",
+      "host_location": "Burglen Switzerland",
+      "id": 6
+    },
+    {
+      "cityName": "Qal‘eh Now Rudab",
+      "country": "Iran (Islamic Republic of)",
+      "countryCode": "IR",
+      "latitude": "36.03174824055305",
+      "longitude": "57.35137939453126",
+      "host_location": "Qal‘eh Now Rudab Iran (Islamic Republic of)",
+      "id": 9
+    },
+    {
+      "cityName": "Qal‘eh Now Rudab",
+      "country": "Iran (Islamic Republic of)",
+      "countryCode": "IR",
+      "latitude": "36.047537550960314",
+      "longitude": "57.36854553222657",
+      "host_location": "Qal‘eh Now Rudab Iran (Islamic Republic of)",
+      "id": 10
+    },
+    {
+      "cityName": "Sheshtamad",
+      "country": "Iran (Islamic Republic of)",
+      "countryCode": "IR",
+      "latitude": "35.95397010739242",
+      "longitude": "57.80456542968751",
+      "host_location": "Sheshtamad Iran (Islamic Republic of)",
+      "id": 11
     }
   ]
 }
