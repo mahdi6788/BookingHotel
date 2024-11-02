@@ -47,5 +47,7 @@ useMapEvent({
 18. AddNewBookmark:
 firstly, write the UI that is a form. secondly, we need the location (latitude and longitude) that we make a custome hook (useUrlLocation) to get info of the clicked point on the map using useMapEvent.
 19. use API to get location of each place. after getting lat and lng through useUrlLocation, we should use the API and the end of that add these lat and lng and  fetch data and find the info like cityname , country and ... . 
+20. use HiTrash in react-icons/hi to have an icon. also should use preventDefault to prevent from doing Link action. 
+21. then we need to delete the item having id from bookmarks also dataset, which is done in BookmarkListProvider as a context containing all states and fuctions we need. create a async-await function to delete item from dataset by using axios.delete.
 
 

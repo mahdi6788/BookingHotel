@@ -19,7 +19,11 @@ function SingleBookmark() {
 
   return (
     <div>
-      <button onClick={() => navigate(-1)} className="btn btn--back" style={{marginBottom:"5px"}}>
+      <button
+        onClick={() => navigate(-1)}
+        className="btn btn--back"
+        style={{ marginBottom: "5px" }}
+      >
         Back
       </button>
       <div
@@ -27,9 +31,11 @@ function SingleBookmark() {
           id === currentBookmark?.id && "current-bookmark"
         }`}
       >
-        <ReactCountryFlag svg countryCode={currentBookmark.countryCode} />
-        &nbsp;<strong>{currentBookmark.cityName}</strong> &nbsp;
-        <span>{currentBookmark.country}</span>
+        <div>
+          <ReactCountryFlag svg countryCode={currentBookmark.countryCode} />
+          &nbsp;<strong>{currentBookmark.cityName}</strong> &nbsp;
+          <span>{currentBookmark.country}</span>
+        </div>
       </div>
     </div>
   );

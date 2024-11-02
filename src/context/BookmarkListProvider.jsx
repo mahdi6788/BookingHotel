@@ -3,8 +3,10 @@ import { createContext } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+/// *** create context
 const BookMarkList = createContext();
 
+/// *** make function for contex provider
 function BookmarkListProvider({ children }) {
   const URL = "http://localhost:5000/bookmarks";
 
@@ -56,7 +58,19 @@ useEffect(() => {
     }
   }
 
+  async function deleteBookmark(id){
+    setIsLoading(true)
+    try {
+      await axios.delete(`${URL}/${id}`)
+      setBookmarks(prev => prev.filter(item => item.id !== id))
+    } catch (error) {
+      toast.error(error.message)
+    } finally {
+    setIsLoading(false)
+    }
+  }
 
+/// *** return values containing states and functions created here in provider
   return (
     <BookMarkList.Provider
       value={{
@@ -64,7 +78,8 @@ useEffect(() => {
         isLoading,
         getsingleBookmark,
         currentBookmark,
-        createBookmark
+        createBookmark,
+        deleteBookmark
       }}
     >
       {children}
@@ -74,6 +89,7 @@ useEffect(() => {
 
 export default BookmarkListProvider;
 
+/// *** useContext to use created context and we can call this function useBookmark in any component and use the values
 export function useBookmark() {
   return useContext(BookMarkList);
 }
