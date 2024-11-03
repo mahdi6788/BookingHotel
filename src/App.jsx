@@ -25,13 +25,8 @@ function App() {
             <Toaster />
             <Header />
             <Routes>
-              <Route path="/bookmark" element={<Bookmark />} />
+              <Route path="/" element={<LocationList />} />     {/* Home page */}
               <Route path="/login" element={<Login />} />
-              <Route path="/" element={<LocationList />} />
-              <Route path="/hotels" element={<AppLayout />}>
-                <Route index element={<Hotels />} />
-                <Route path=":id" element={<SingleHotel />} />
-              </Route>
               <Route
                 path="/bookmark"
                 element={
@@ -43,6 +38,10 @@ function App() {
                 <Route index element={<Bookmark />} />
                 <Route path="add" element={<AddNewBookmark />} />
                 <Route path=":id" element={<SingleBookmark />} />
+              </Route>
+              <Route path="/hotels" element={<AppLayout />}>
+                <Route index element={<Hotels />} />
+                <Route path=":id" element={<SingleHotel />} />
               </Route>
             </Routes>
           </div>

@@ -1,5 +1,16 @@
 Booking website:
 
+Notes:
+App: contains different Providers (context), Toaster displaying all errors throughout the program, Header and Routes.
+Routes: During the program we need to navigate the user to some specific pages, so we need to already define the pages by using the Route. 
+g.g. in header, there are some links to convey the user to other pages, like Home, Bookmark and Login. 
+Also, after entering information about date, room and location, user navigate to AppLayout, by clicking on search.
+AppLayout contains two sections: static part like map that does not change, and dynamic part like hotels information that has two children, Hotels and SingleHotel, so Route of AppLayout has two nested Route for its children. Accordingly, we use Outlet to handle the dynamic part, into the AppLayout.
+Layout: in each layout like AppLayout or BookmarkLayout, there is a nested route with the path named index related to the main page shown to the user. and other pages have reletive paths. (absolute path has slash mark "/" and reletive path does not has slash mark.)
+
+
+
+
 1. use some customHooks or components for new project: useFetch, Toast
 2. when we have dynamic parts into a component we use built-in component named <Outlet/>
 3. dynamic route
