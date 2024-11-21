@@ -29,7 +29,7 @@ Then use them in query.
 url: server (database),
 note: if we want to search in all query string, we should use q instead of name or accommodation:
 name_like=${destination || ""} ===> q=${destination || ""}
-6. after getting data from datavbase in server by using url and filtered by query, should render data properties into a Link tag to be clickable.
+6. after getting data from database in server by using url and filtered by query, should render data properties into a Link tag to be clickable.
 7. the initial value of destination can be defined by previous location searched or nothing for the first search.
 8. *** we need data for both Sidebar and MapContainer: so we should create a Context and provide it in App component and consume it in useContext.
 9. HotelsProvider:
@@ -72,4 +72,7 @@ make a context including useReducer
 24. login page
 25. Authorization
 
+26. ***RUN*** when run the app should run both dev and server: 
+npm run dev
+npm run server   /// if donot run the server, the server does not work correctly and throw error regarding network
 
