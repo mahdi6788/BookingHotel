@@ -23,24 +23,31 @@ function HotelsProvider({ children }) {
   /// name_like=${destination || ""} ===> q=${destination || ""}
   const { data: hotels, isLoading } = useFetch(URL, query);
 
+  const [currentHotel, setCurrentHotel] = useState(null);
+  const [isLoadingCurrentHotel, setIsLoadingCurrentHotel] = useState(false);
 
-  const [currentHotel, setCurrentHotel] = useState(null)
-  const [isLoadingCurrentHotel, setIsLoadingCurrentHotel] =useState(false)
-  
-  async function getsingleHotel(id){
-    setIsLoadingCurrentHotel(true)
+  async function getsingleHotel(id) {
+    setIsLoadingCurrentHotel(true);
     try {
-      const {data} = await axios.get(`${URL}/${id}`)
-      setCurrentHotel(data)
+      const { data } = await axios.get(`${URL}/${id}`);
+      setCurrentHotel(data);
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     } finally {
-      setIsLoadingCurrentHotel(false)
+      setIsLoadingCurrentHotel(false);
     }
   }
 
   return (
-    <HotelContext.Provider value={{ hotels, isLoading, getsingleHotel, isLoadingCurrentHotel, currentHotel }}>
+    <HotelContext.Provider
+      value={{
+        hotels,
+        isLoading,
+        getsingleHotel,
+        isLoadingCurrentHotel,
+        currentHotel,
+      }}
+    >
       {children}
     </HotelContext.Provider>
   );
