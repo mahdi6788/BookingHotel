@@ -14,7 +14,7 @@ import AddNewBookmark from "./components/AddNewBookmark/AddNewBookmark";
 import Login from "./components/Login";
 import AuthContextProvider from "./context/AuthContextProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
-import LocationList from "./components/locationList/LocationList";
+import LocationList from "./components/LocationList/LocationList";
 
 function App() {
   return (
