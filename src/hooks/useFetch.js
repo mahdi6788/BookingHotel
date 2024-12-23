@@ -13,7 +13,7 @@ function useFetch(url, query){
             try {
                 setIsLoading(true)
                 const {data} = await axios.get(`${url}?${query}`)
-                setData(data)
+                setData(data.hotels)
             } catch (err) {
                 setData([])
                 toast.error(err?.message)

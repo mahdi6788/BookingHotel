@@ -15,7 +15,7 @@ function HotelsProvider({ children }) {
   /// get inforamtion from database using created useFetch hook
   /// url of server (database)
   // const URL = "http://localhost:5000/hotels";
-  const URL = "https://bookinghotel-opal.vercel.app/db.json/hotels";
+  const URL = "https://bookinghotel-opal.vercel.app/db.json";
 
   /// filter from database
   const query = `name_like=${destination || ""}&accommodates_gte=${
