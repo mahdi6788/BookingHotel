@@ -12,8 +12,8 @@ function useFetch(url, query){
         async function fetchingData(){
             try {
                 setIsLoading(true)
-                const {data} = await axios.get(`${url}?${query}`)
-                setData(data.hotels)
+                const response = await axios.get(`${url}?${query}`)
+                setData(response.data.hotels)
             } catch (err) {
                 setData([])
                 toast.error(err?.message)
