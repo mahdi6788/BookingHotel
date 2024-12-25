@@ -105,10 +105,13 @@ function Header() {
           )}
           <span className="seperator"></span>
         </div>
-        <div className="headerSearchItem">
+        <div className="headerPeople">
           <div id="optionDropDown" onClick={() => setOpenOption(!openOption)}>
-            {options.adult} adult &bull; {options.children} children &bull;{" "}
-            {options.room} room
+            <ul>
+              <li>&bull; {options.adult} adult</li>
+              <li>&bull; {options.children} children</li>
+              <li>&bull; {options.room} room</li>
+            </ul>
           </div>
           {openOption && (
             <GuestOptionList
